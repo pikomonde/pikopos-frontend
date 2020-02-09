@@ -25,216 +25,120 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home,
-    beforeEnter: (to, from, next) => {
-      if (store.getters['auth/isAuthenticated']) {
-        return next({
-          name: 'dashboard'
-        })
-      }
-      next()
-    }
+    beforeEnter: (t, f, n) => { this.middlewareUnprotected(t, f, n) }
   },
   {
     path: '/login',
     name: 'login',
     component: Login,
-    beforeEnter: (to, from, next) => {
-      if (store.getters['auth/isAuthenticated']) {
-        return next({
-          name: 'dashboard'
-        })
-      }
-      next()
-    }
+    beforeEnter: (t, f, n) => { this.middlewareUnprotected(t, f, n) }
   },
   {
     path: '/register',
     name: 'register',
     component: Register,
-    beforeEnter: (to, from, next) => {
-      if (store.getters['auth/isAuthenticated']) {
-        return next({
-          name: 'dashboard'
-        })
-      }
-      next()
-    }
+    beforeEnter: (t, f, n) => { this.middlewareUnprotected(t, f, n) }
   },
   {
     path: '/dashboard',
     name: 'dashboard',
     component: Dashboard,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['auth/isAuthenticated']) {
-        return next({
-          name: 'login'
-        })
-      }
-      next()
-    }
+    beforeEnter: (t, f, n) => { this.middlewareProtected(t, f, n) }
   },
   {
     path: '/ingredient/library',
     name: 'ingredient_library',
     component: IngredientLibrary,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['auth/isAuthenticated']) {
-        return next({
-          name: 'login'
-        })
-      }
-      next()
-    }
+    beforeEnter: (t, f, n) => { this.middlewareProtected(t, f, n) }
   },
   {
     path: '/ingredient/category',
     name: 'ingredient_category',
     component: IngredientCategory,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['auth/isAuthenticated']) {
-        return next({
-          name: 'login'
-        })
-      }
-      next()
-    }
+    beforeEnter: (t, f, n) => { this.middlewareProtected(t, f, n) }
   },
   {
     path: '/ingredient/recipe',
     name: 'ingredient_recipe',
     component: IngredientRecipe,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['auth/isAuthenticated']) {
-        return next({
-          name: 'login'
-        })
-      }
-      next()
-    }
+    beforeEnter: (t, f, n) => { this.middlewareProtected(t, f, n) }
   },
   {
     path: '/product/library',
     name: 'product_library',
     component: ProductLibrary,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['auth/isAuthenticated']) {
-        return next({
-          name: 'login'
-        })
-      }
-      next()
-    }
+    beforeEnter: (t, f, n) => { this.middlewareProtected(t, f, n) }
   },
   {
     path: '/product/category',
     name: 'product_category',
     component: ProductCategory,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['auth/isAuthenticated']) {
-        return next({
-          name: 'login'
-        })
-      }
-      next()
-    }
+    beforeEnter: (t, f, n) => { this.middlewareProtected(t, f, n) }
   },
   {
     path: '/product/modifier',
     name: 'product_modifier',
     component: ProductModifier,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['auth/isAuthenticated']) {
-        return next({
-          name: 'login'
-        })
-      }
-      next()
-    }
+    beforeEnter: (t, f, n) => { this.middlewareProtected(t, f, n) }
   },
   {
     path: '/employees/slot',
     name: 'employee_slot',
     component: EmployeeSlot,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['auth/isAuthenticated']) {
-        return next({
-          name: 'login'
-        })
-      }
-      next()
-    }
+    beforeEnter: (t, f, n) => { this.middlewareProtected(t, f, n) }
   },
   {
     path: '/employees/role',
     name: 'employee_role',
     component: EmployeeRole,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['auth/isAuthenticated']) {
-        return next({
-          name: 'login'
-        })
-      }
-      next()
-    }
+    beforeEnter: (t, f, n) => { this.middlewareProtected(t, f, n) }
   },
   {
     path: '/employees/pin',
     name: 'employee_pin',
     component: EmployeePIN,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['auth/isAuthenticated']) {
-        return next({
-          name: 'login'
-        })
-      }
-      next()
-    }
+    beforeEnter: (t, f, n) => { this.middlewareProtected(t, f, n) }
   },
   {
     path: '/store/account',
     name: 'store_account',
     component: StoreAccount,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['auth/isAuthenticated']) {
-        return next({
-          name: 'login'
-        })
-      }
-      next()
-    }
+    beforeEnter: (t, f, n) => { this.middlewareProtected(t, f, n) }
   },
   {
     path: '/store/outlet',
     name: 'store_outlet',
     component: StoreOutlet,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['auth/isAuthenticated']) {
-        return next({
-          name: 'login'
-        })
-      }
-      next()
-    }
+    beforeEnter: (t, f, n) => { this.middlewareProtected(t, f, n) }
   },
   {
     path: '/store/plan',
     name: 'store_plan',
     component: StorePlan,
-    beforeEnter: (to, from, next) => {
-      if (!store.getters['auth/isAuthenticated']) {
-        return next({
-          name: 'login'
-        })
-      }
-      next()
-    }
+    beforeEnter: (t, f, n) => { this.middlewareProtected(t, f, n) }
   }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
+  middlewareProtected (to, from, next) {
+    if (!store.getters['auth/isAuthenticated']) {
+      return next({
+        name: 'login'
+      })
+    }
+    next()
+  },
+  middlewareUnprotected (to, from, next) {
+    if (store.getters['auth/isAuthenticated']) {
+      return next({
+        name: 'dashboard'
+      })
+    }
+    next()
+  }
 })
 
 export default router
