@@ -39,18 +39,30 @@
 
       <v-divider></v-divider>
 
-      <v-list dense nav>
-        <v-list-item v-for="menu in menus" :key="menu.title" link>
-          <v-list-item-icon>
-            <v-icon>{{ menu.icon }}</v-icon>
-          </v-list-item-icon>
+      <v-list-group
+        v-for="(menu, menuID) in menus"
+        :key="menuID"
+        :prepend-icon="menu.icon"
+        :append-icon="menu.submenus.length != 0 ? '$expand' : ''"
+        no-action
+      >
+        <template v-slot:activator>
+          <v-list-item-title>{{ menu.title }}</v-list-item-title>
+        </template>
+
+        <v-list-item
+          v-for="(submenu, submenuID) in menu.submenus"
+          :key="submenuID"
+          dense
+          link
+        >
 
           <v-list-item-content>
-            <v-list-item-title>{{ menu.title }}</v-list-item-title>
+            <v-list-item-title>{{ submenu.title }}</v-list-item-title>
           </v-list-item-content>
-        </v-list-item>
-      </v-list>
 
+        </v-list-item>
+      </v-list-group>
       <template v-slot:append>
         <div>
           <v-btn block @click.prevent="logOutMethod">
@@ -77,9 +89,88 @@ export default {
   data () {
     return {
       menus: [
-        { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-        { title: 'Photos', icon: 'mdi-image' },
-        { title: 'About', icon: 'mdi-help-box' }
+        {
+          title: 'Dashboard',
+          icon: 'mdi-view-dashboard',
+          submenus: []
+        },
+        {
+          title: 'Reports',
+          icon: 'mdi-file-chart',
+          submenus: []
+        },
+        {
+          title: 'Ingredients',
+          icon: 'mdi-barley',
+          submenus: [
+            {
+              title: 'Ingredients Library',
+              icon: ''
+            },
+            {
+              title: 'Ingredients Category',
+              icon: ''
+            },
+            {
+              title: 'Recipe',
+              icon: ''
+            }
+          ]
+        },
+        {
+          title: 'Products',
+          icon: 'mdi-baguette',
+          submenus: [
+            {
+              title: 'Product Library',
+              icon: ''
+            },
+            {
+              title: 'Product Category',
+              icon: ''
+            },
+            {
+              title: 'Modifier',
+              icon: ''
+            }
+          ]
+        },
+        {
+          title: 'Employees',
+          icon: 'mdi-account-multiple',
+          submenus: [
+            {
+              title: 'Employee Slot',
+              icon: ''
+            },
+            {
+              title: 'Employee Role',
+              icon: ''
+            },
+            {
+              title: 'Employee PIN',
+              icon: ''
+            }
+          ]
+        },
+        {
+          title: 'Store',
+          icon: 'mdi-store',
+          submenus: [
+            {
+              title: 'Store Account',
+              icon: ''
+            },
+            {
+              title: 'Store Outlet',
+              icon: ''
+            },
+            {
+              title: 'Plan ',
+              icon: ''
+            }
+          ]
+        }
       ]
     }
   },
