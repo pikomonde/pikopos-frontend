@@ -55,6 +55,7 @@
           :key="submenuID"
           dense
           link
+          :to="{name:submenu.route}"
         >
 
           <v-list-item-content>
@@ -105,15 +106,18 @@ export default {
           submenus: [
             {
               title: 'Ingredients Library',
-              icon: ''
+              icon: '',
+              route: 'ingredient_library'
             },
             {
               title: 'Ingredients Category',
-              icon: ''
+              icon: '',
+              route: 'ingredient_category'
             },
             {
               title: 'Recipe',
-              icon: ''
+              icon: '',
+              route: 'ingredient_recipe'
             }
           ]
         },
@@ -123,15 +127,18 @@ export default {
           submenus: [
             {
               title: 'Product Library',
-              icon: ''
+              icon: '',
+              route: 'product_library'
             },
             {
               title: 'Product Category',
-              icon: ''
+              icon: '',
+              route: 'product_category'
             },
             {
               title: 'Modifier',
-              icon: ''
+              icon: '',
+              route: 'product_modifier'
             }
           ]
         },
@@ -141,15 +148,18 @@ export default {
           submenus: [
             {
               title: 'Employee Slot',
-              icon: ''
+              icon: '',
+              route: 'employee_slot'
             },
             {
               title: 'Employee Role',
-              icon: ''
+              icon: '',
+              route: 'employee_role'
             },
             {
               title: 'Employee PIN',
-              icon: ''
+              icon: '',
+              route: 'employee_pin'
             }
           ]
         },
@@ -159,15 +169,18 @@ export default {
           submenus: [
             {
               title: 'Store Account',
-              icon: ''
+              icon: '',
+              route: 'store_account'
             },
             {
               title: 'Store Outlet',
-              icon: ''
+              icon: '',
+              route: 'store_outlet'
             },
             {
               title: 'Plan ',
-              icon: ''
+              icon: '',
+              route: 'store_plan'
             }
           ]
         }
