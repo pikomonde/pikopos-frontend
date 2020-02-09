@@ -1,32 +1,54 @@
 <template>
-  <form @submit.prevent="submit">
-    <div>
-      <label for="company_username">
-        Store Name
-      </label> <br/>
-      <input type="text" name="company_username" id="company_username" v-model="form.company_username">
-    </div> <br/>
+  <v-form @submit.prevent="submit">
+    <v-container>
+      <v-row dense justify="center">
+        <v-col cols="6">
+          <v-container>
+            <v-row dense justify="center">
+              <v-col cols="4">
+                <v-text-field
+                  name="company_username"
+                  v-model="form.company_username"
+                  label="Store Name"
+                ></v-text-field>
+              </v-col>
+            </v-row>
 
-    <div>
-      <label for="employee_identifier">
-        Email
-      </label> <br/>
-      <input type="email" name="employee_identifier" id="employee_identifier" v-model="form.employee_identifier">
-    </div> <br/>
+            <v-row dense justify="center">
+              <v-col cols="4">
+                <v-text-field
+                  name="employee_identifier"
+                  v-model="form.employee_identifier"
+                  label="Email"
+                ></v-text-field>
+              </v-col>
+            </v-row>
 
-    <div>
-      <label for="password">
-        Password
-      </label> <br/>
-      <input type="password" name="password" id="password" v-model="form.password">
-    </div> <br/>
+            <v-row dense justify="center">
+              <v-col cols="4">
+                <v-text-field
+                  name="password"
+                  v-model="form.password"
+                  label="Password"
+                  :rules="[rules.required]"
+                  :type="showPass ? 'text' : 'password'"
+                  :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="showPass = !showPass"
+                ></v-text-field>
+              </v-col>
+            </v-row>
 
-    <div>
-      <button type="submit">
-        Submit
-      </button>
-    </div>
-  </form>
+            <v-row dense justify="center">
+              <v-btn dark class="red" type="submit">
+                Log In
+              </v-btn>
+            </v-row>
+
+          </v-container>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-form>
 </template>
 
 <script>
@@ -43,6 +65,10 @@ export default {
         company_username: 'toko_bunga_03',
         employee_identifier: 'nugraha@gmail.com',
         password: 'ABC5dasar'
+      },
+      showPass: false,
+      rules: {
+        required: value => !!value || 'Required'
       }
     }
   },
