@@ -61,12 +61,14 @@ export default {
   },
   data () {
     return {
+      showPass: false,
+
       form: {
         company_username: 'toko_bunga_03',
-        employee_identifier: 'nugraha@gmail.com',
+        employee_identifier: 'nugraha.alim@gmail.com',
         password: 'ABC5dasar'
       },
-      showPass: false,
+
       rules: {
         required: value => !!value || 'Required'
       }
