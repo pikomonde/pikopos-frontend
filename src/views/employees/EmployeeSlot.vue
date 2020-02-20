@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapActions } from 'vuex'
 
 export default {
   data () {
@@ -136,50 +136,16 @@ export default {
   },
 
   methods: {
-    async reqData (method, path, payload) {
-      let response
-      try {
-        if (method === 'GET') {
-          response = await axios.get(path, { params: payload })
-        } else if (method === 'POST') {
-          response = await axios.post(path, payload)
-        }
-      } catch (e) {
-        // catch for 4xxx and 5xxx errors
-        let txt = e.response && e.response.data && e.response.data.data && e.response.data.data.message
-        if (txt === '') {
-          console.log(e.response)
-          txt = 'Something bad happened! (' + e.response.status + ')'
-        }
-        this.snackbar = {
-          show: true,
-          color: 'error',
-          text: txt
-        }
-        return false
-      }
-
-      if (!response || !response.data) {
-        // TODO:
-        console.log('response', response)
-        return false
-      }
-      if (response.data.status !== 200) {
-        // TODO:
-        console.log('response.data.status', response.data.status)
-        return false
-      }
-      if (!response.data.data) {
-        // TODO:
-        console.log('response.data', response.data)
-        return false
-      }
-
-      return response.data.data
-    },
+    ...mapActions({
+      reqData: 'basicRequest/reqData'
+    }),
 
     getDataList () {
-      this.reqData('GET', 'employee/list', this.formList).then((data) => {
+      this.reqData({
+        method: 'GET',
+        path: 'employee/list',
+        payload: this.formList
+      }).then((data) => {
         // if server returns data null
         if (!data) {
           this.snackbar = { show: true, color: 'error', text: 'Failed to update data' }
@@ -212,7 +178,11 @@ export default {
     },
 
     updateData () {
-      this.reqData('POST', 'employee/update', this.formUpdate).then((data) => {
+      this.reqData({
+        method: 'POST',
+        path: 'employee/update',
+        payload: this.formUpdate
+      }).then((data) => {
         // if server returns data null
         if (!data) {
           this.snackbar = { show: true, color: 'error', text: 'Failed to update data' }
