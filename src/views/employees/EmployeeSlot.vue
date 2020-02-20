@@ -138,13 +138,29 @@ export default {
   methods: {
     async reqData (method, path, payload) {
       let response
-      if (method === 'GET') {
-        response = await axios.get(path, { params: payload })
-      } else if (method === 'POST') {
-        response = await axios.post(path, payload)
+      try {
+        if (method === 'GET') {
+          response = await axios.get(path, { params: payload })
+        } else if (method === 'POST') {
+          response = await axios.post(path, payload)
+        }
+      } catch (e) {
+        // catch for 4xxx and 5xxx errors
+        let txt = e.response && e.response.data && e.response.data.data && e.response.data.data.message
+        if (txt === '') {
+          console.log(e.response)
+          txt = 'Something bad happened! (' + e.response.status + ')'
+        }
+        this.snackbar = {
+          show: true,
+          color: 'error',
+          text: txt
+        }
+        return false
       }
+
       if (!response || !response.data) {
-        // TODO: some error on response
+        // TODO:
         console.log('response', response)
         return false
       }
@@ -166,6 +182,7 @@ export default {
       this.reqData('GET', 'employee/list', this.formList).then((data) => {
         // if server returns data null
         if (!data) {
+          this.snackbar = { show: true, color: 'error', text: 'Failed to update data' }
           return
         }
 
@@ -198,18 +215,13 @@ export default {
       this.reqData('POST', 'employee/update', this.formUpdate).then((data) => {
         // if server returns data null
         if (!data) {
-          // TODO: Failed
-          this.snackbar.show = true
-          this.snackbar.color = 'error'
-          this.snackbar.text = 'Failed to update data'
+          this.snackbar = { show: true, color: 'error', text: 'Failed to update data' }
           return
         }
 
-        this.snackbar.show = true
-        this.snackbar.color = 'success'
-        this.snackbar.text = data.row_updated + ' data is updated'
+        this.snackbar = { show: true, color: 'success', text: data.row_updated + ' data is updated' }
+        this.getDataList()
       })
-      this.getDataList()
     }
   }
 }
