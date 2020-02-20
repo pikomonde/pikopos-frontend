@@ -27,31 +27,26 @@ export default {
           console.log(e.response)
           txt = 'Something bad happened! (' + e.response.status + ')'
         }
-        this.snackbar = {
-          show: true,
-          color: 'error',
-          text: txt
-        }
-        return false
+        return { success: false, snackbar: { show: true, color: 'error', text: txt } }
       }
 
       if (!response || !response.data) {
         // TODO:
         console.log('response', response)
-        return false
+        return { success: false, snackbar: { show: true, color: 'error', text: 'Failed to update data' } }
       }
       if (response.data.status !== 200) {
         // TODO:
         console.log('response.data.status', response.data.status)
-        return false
+        return { success: false, snackbar: { show: true, color: 'error', text: 'Failed to update data' } }
       }
       if (!response.data.data) {
         // TODO:
         console.log('response.data', response.data)
-        return false
+        return { success: false, snackbar: { show: true, color: 'error', text: 'Failed to update data' } }
       }
 
-      return response.data.data
+      return { success: true, data: response.data.data }
     }
   }
 }

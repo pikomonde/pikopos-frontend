@@ -97,7 +97,7 @@ export default {
       totalItems: 0,
       selectedID: 0,
       snackbarShow: false,
-      snackbarText: 'LOL',
+      snackbarText: '',
       items: [],
 
       snackbar: {
@@ -147,13 +147,17 @@ export default {
         payload: this.formList
       }).then((data) => {
         // if server returns data null
-        if (!data) {
+        if (!data.success) {
+          if (!data.success.snackbar) {
+            this.snackbar = data.snackbar
+            return
+          }
           this.snackbar = { show: true, color: 'error', text: 'Failed to update data' }
           return
         }
 
-        this.totalItems = data.count
-        this.items = data.employees
+        this.totalItems = data.data.count
+        this.items = data.data.employees
       })
     },
 
@@ -184,12 +188,12 @@ export default {
         payload: this.formUpdate
       }).then((data) => {
         // if server returns data null
-        if (!data) {
-          this.snackbar = { show: true, color: 'error', text: 'Failed to update data' }
+        if (!data.success) {
+          this.snackbar = data.snackbar
           return
         }
 
-        this.snackbar = { show: true, color: 'success', text: data.row_updated + ' data is updated' }
+        this.snackbar = { show: true, color: 'success', text: data.data.row_updated + ' data is updated' }
         this.getDataList()
       })
     }
