@@ -24,7 +24,7 @@ export default {
         // catch for 4xxx and 5xxx errors
         let txt = e.response && e.response.data && e.response.data.data && e.response.data.data.message
         if (txt === '') {
-          console.log(e.response)
+          // console.log(e.response)
           txt = 'Something bad happened! (' + e.response.status + ')'
         }
         return { success: false, snackbar: { show: true, color: 'error', text: txt } }
@@ -32,17 +32,17 @@ export default {
 
       if (!response || !response.data) {
         // TODO:
-        console.log('response', response)
+        // console.log('response', response)
         return { success: false, snackbar: { show: true, color: 'error', text: 'Failed to update data' } }
       }
       if (response.data.status !== 200) {
         // TODO:
-        console.log('response.data.status', response.data.status)
+        // console.log('response.data.status', response.data.status)
         return { success: false, snackbar: { show: true, color: 'error', text: 'Failed to update data' } }
       }
       if (!response.data.data) {
         // TODO:
-        console.log('response.data', response.data)
+        // console.log('response.data', response.data)
         return { success: false, snackbar: { show: true, color: 'error', text: 'Failed to update data' } }
       }
 

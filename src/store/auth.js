@@ -33,11 +33,11 @@ export default {
       let response = await axios.post('auth/login', credentials)
       if (!response || !response.data || (response.data.status !== 200)) {
         // TODO: some error on response
-        console.log(response)
+        // console.log(response)
       }
       if (!response.data.data || !response.data.data.token) {
         // TODO: some error on data token
-        console.log(response.data)
+        // console.log(response.data)
       }
 
       return dispatch('auth', response.data.data.token)
@@ -59,11 +59,11 @@ export default {
 
         if (!response || !response.data || (response.data.status !== 200)) {
           // TODO: some error on response
-          console.log(response)
+          // console.log(response)
         }
         if (!response.data.data || !response.data.data) {
           // TODO: some error on data token
-          console.log(response.data)
+          // console.log(response.data)
         }
 
         commit('setUser', response.data.data)
